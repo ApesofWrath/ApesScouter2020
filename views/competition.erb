@@ -1,0 +1,22 @@
+<%= erb :header %>
+
+<div class="container">
+    <div class="pull-right" style="margin-top: 15px;">
+        <a href="/competitions/<%= @competition.id %>/new_match" class="btn btn-success btn-small">
+            <i class="icon-white icon-plus-sign"></i> New Match
+        </a>
+        <a href="/competitions/<%= @competition.id %>/new_pit_scout" class="btn btn-success btn-small">
+            <i class="icon-white icon-plus-sign"></i> Pit Scout
+        </a>    
+    </div>
+    <h3><b><%= @competition.name %> <%= @competition.year %> - All Match Data</b></h3
+
+    <% if @match_sort.to_s == "team_number" || @match_sort.to_s == "match_number" %>
+        <%= erb :data_list, :locals => { :matches => Match.where(:comp_id => @competition.id).order(Sequel.asc(@match_sort)) } %>
+    <% else %>
+        <%= erb :data_list, :locals => { :matches => Match.where(:comp_id => @competition.id).order(Sequel.desc(@match_sort)) } %>
+    <% end %>
+</div>
+<br>
+
+<%= erb :footer %>

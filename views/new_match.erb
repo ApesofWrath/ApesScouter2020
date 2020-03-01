@@ -1,0 +1,274 @@
+<%= erb :header %>
+
+<div class="container">
+    <h2>Enter New Match Info (<%= @competition.name %> - <%= @competition.year %>)</h2>
+    <form action="/matches" method="POST" id="myForm" enctype="multipart/form-data">
+        <label>Name</label>
+        <input type="text" name="name" required placeholder="Name of scouter"/>
+
+        <label>Team Number</label>
+        <input type="number" min=1 max=9999 name="team_number" required />
+
+        <label>Match Number</label>
+        <input type="number" min=1 max=200 name="match_number" required placeholder="Qualification Match Number" />
+
+        <br>
+
+        <h3>Autonomous</h3>
+        <label>Pre Load</label>
+        <select name="preload" required>
+            <option value="" selected disabled hidden>Select pre-loaded item</option>
+            <option value="nothing">Nothing</option>
+            <option value="1 ball">1 ball</option>
+            <option value="2 balls">2 balls</option>
+            <option value="3 balls">3 balls</option>
+        </select>
+    
+        <label>Crossed Initiation Line</label>
+        <select name="cross_line" required>
+            <option value="" selected disabled hidden>Did the bot cross the line?</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+         </select>
+
+        <br>
+        
+        <!-- Auton Scoring -->
+        <label>Scored Pieces DURING THE AUTONOMOUS PERIOD</label>
+        <table class="table table-condensed table-bordered" style="width: auto;">
+            <tr>
+                <td><button type=button class="btn btn-info btn-large" onClick="addOne('auton_top')">Top Port:</button></td>
+                <td><input type="text" value="0" readonly="readonly" style="width:5em" name="auton_top" id="auton_top"></td>
+            </tr>
+            <tr>
+                <td><button type=button class="btn btn-warning btn-large" onClick="addOne('auton_bottom')">Bottom Port:</button></td>
+                <td><input type="text" value="0" readonly="readonly" style="width:5em" name="auton_bottom" id="auton_bottom"></td>
+            </tr>
+
+            <tr>
+                <td><button type=button class="btn btn-danger btn-large" onClick="addOne('auton_misses')">Misses:</           button></td>
+                <td><input type="text" value="0" readonly="readonly" style="width:5em" name="auton_misses"                    id="auton_misses"></td>
+            </tr>
+        </table>
+
+        <br>
+
+        <h3>Tele Op</h3>
+
+        <label>Power Cells Scored</label>
+        <table class="table table-condensed table-bordered" style="width: auto;">
+            <tr>
+                <td><button type=button class="btn btn-info btn-large" onClick="addOne('tele_top')">Top Port:</button></td>
+                <td><input type=text value="0" readonly="readonly" style="width:5em" name="tele_top" id="tele_top"></td>
+            </tr>
+            <tr>
+                <td><button type=button class="btn btn-warning btn-large" onClick="addOne('tele_bottom')">Bottom Port:</button></td>
+                <td><input type=text value="0" readonly="readonly" style="width:5em" name="tele_bottom" id="tele_bottom"></td>
+            </tr>
+            <tr>
+                <td><button type=button class="btn btn-danger btn-large" onClick="addOne('tele_misses')">Misses:      </button></td>
+                <td><input type=text value="0" readonly="readonly" style="width:5em" name="tele_misses"                     id="tele_misses"></td>
+            </tr>
+        </table>
+
+        <label>Dropped Power Cells</label>
+        <table class="table table-condensed table-bordered" style="width: auto;">
+            <tr>
+                <td><button type=button class="btn btn-danger btn-large" onClick="addOne('dropped_balls')">Drops:</button></td>
+                <td><input type=text value="0" readonly="readonly" style="width:5em" name="dropped_balls" id="dropped_balls"></td>
+            </tr>
+        </table>
+
+        <br>
+
+        <label>Primary Shooting Position</label>
+        <select name="shooting_spot" required>
+            <option value="na">Don't shoot</option>
+            <option value="scoring zone">Scoring Zone</option>
+            <option value="initiation line">Initiation Line</option>
+            <option value="near trench">Near Trench</option>
+            <option value="far trench">Far Trench</option>
+            <option value="against wall">Against Wall</option>
+        </select>        
+
+        <label>Control Panel</label>
+        <select name="control_panel" required>
+            <option value="nothing">Nothing</option>
+            <option value="rotation">Rotation</option>
+            <option value="position">Position</option>
+            <option value="rotation and position">Rotation and Position</option>
+        </select>
+        <br>
+
+        <h3>Endgame</h3>
+        <label>Climb</label>
+        <select name="climb" required>
+            <option value="" selected disabled hidden>Position at end of match?</option>
+            <option value="hanging and balanced">Hanging and balanced</option>
+            <option value="hanging not balanced">Hanging, but not balanced</option>
+            <option value="park">Parked</option>
+            <option value="none">Neither</option>
+        </select>
+
+        <label>Result</label>
+        <select name="result" required>
+            <option value="" selected disabled hidden>W/L/T</option>
+            <option value="win">Win</option>
+            <option value="lose">Lose</option>
+            <option value="tie">Tie</option>
+        </select>
+
+        <label>Score</label>
+        <input type="number" min=0 max=999 style="width:5em" name="own_score" placeholder="Own" required />
+        <input type="number" min=0 max=999 style="width:5em" name="opp_score" placeholder="Opp" required />
+
+        <label>Ranking Points</label>
+        <select name="ranking_points" required>
+            <option value="" selected disabled hidden>Number of rank points alliance received</option>
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+        </select>
+
+        <br>
+
+        <h3>Miscellaneous</h3>
+        <label>Can actively balance on climb</label>
+        <select name="actively_balance" required>
+            <option value="" selected disabled hidden>Adjusts itself to balance</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="unsure">Unsure</option>
+        </select>
+
+        <label>Has Lifts for Buddy Climb</label>
+        <select name="buddy_climb" required>
+            <option value="" selected disabled hidden>Lifts another bot to both climb</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="unsure">Unsure</option>
+        </select>
+
+        <label>Has a Camera</label>
+        <select name="camera" required>
+            <option value="" selected disabled hidden>Select Option</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="unsure">Unsure</option>
+        </select>   
+
+        <label>Power Cell Ground Pickup</label>
+        <select name="ball_ground_pickup" required>
+            <option value="" selected disabled hidden>Pickup power cell from floor?</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+            <option value="unsure">Unsure</option>
+        </select>
+
+        <label>Power Cell Human Intake</label>
+        <select name="ball_human_intake" required>
+            <option value="" selected disabled hidden>Get balls directly from human?</option>
+            <option value="top">Top</option>
+            <option value="bottom">Bottom</option>
+            <option value="both">Both</option>
+            <option value="no">No</option>
+        </select>
+
+        <label>Bot power cell capacity</label>
+        <input type="number" min=0 max=5 style="width:5em" name="ball_capacity" placeholder="0" required />
+
+        <label>Driver Skill</label>
+        <select name="driver_skill" required>
+            <option value="" selected disabled hidden>Rate driving</option>
+            <option value="Amazing">Amazing</option>
+            <option value="Good">Good</option>
+            <option value="Fair">Fair</option>
+            <option value="Poor">Poor</option>
+        </select>   
+
+        <label>Played Defense</label>
+        <select name="played_defense" required>
+            <option value="" selected disabled hidden>Play any defense?</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select>
+
+        <label>Notes</label>
+        <textarea name="notes" rows="4" placeholder="Write anything not covered in above questions."></textarea>
+
+        <br><br>
+        <input type=hidden name="comp_id" value="<%= @competition.id %>">
+
+        <label><input type="submit" class="btn btn-success btn-large" value="Save Info"></label>
+    </form>
+
+    <div id="undo_and_hist">
+        <p id="history">Last button press: None</p>
+        <button class="btn btn-danger btn-large" id="undo" onClick="undo()">Undo</button>
+    </div>
+</div>
+
+<!-- JS script for keeping track of button presses -->
+<script type="text/javascript">
+    window.onload = function() {
+          reloadValues();
+    };
+
+    var lastIds = [];
+    var data = {
+        "auton_top": 0,
+        "auton_bottom": 0,
+        "auton_misses": 0,
+        "tele_top": 0,
+        "tele_bottom": 0,
+        "tele_misses": 0,
+        "dropped_balls": 0,
+    };
+    
+    function addOne(id) {
+        lastIds.push(id);
+        data[id]++;
+        document.getElementById(id).value = data[id];
+        document.getElementById("history").innerHTML = "Last button press: " + id.replace(/_/g, ' ');
+    };
+
+    function undo() {
+        if(data[lastIds[lastIds.length - 1]] > 0) {
+            data[lastIds[lastIds.length - 1]]--;
+            document.getElementById(lastIds[lastIds.length - 1]).value = data[lastIds[lastIds.length - 1]];
+        }
+        lastIds.splice(lastIds.length -1, 1);
+
+        if(lastIds.length > 0) {
+            document.getElementById("history").innerHTML = "Last button press: " + lastIds[lastIds.length - 1].replace(/_/g, ' ');
+        }
+        else {
+            document.getElementById("history").innerHTML = "Last button press: None";
+        }
+    };
+
+    function reloadValues() {
+        for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+                data[key] = document.getElementById(key).value;
+            }
+        }
+    };
+</script>
+
+<style>
+    /* Undo button */
+    #undo_and_hist {
+        position: fixed;
+        bottom: 10px;
+        right: 5px;
+        background-color: #ccc;
+        border-radius: 5px;
+        padding: 3px;
+        border: 1px solid #777;
+    }
+</style>
+
+<%= erb :footer %>

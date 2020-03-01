@@ -1,0 +1,17 @@
+<%= erb :header %>
+
+<div class="container">
+    <h2>Add New Competition</h2>
+    <form action="/competitions" method="POST">
+        <label>Name</label>
+        <input type="text" name="name" required />
+
+        <label>Year</label>
+        <input type="number" min="2019" max="2999" name="year" required />
+
+        <label><input type="submit" class="btn btn-success btn-medium" value="Add Competition"></label>
+    </form>
+</div>
+
+<%= erb :footer %>
+

@@ -1,0 +1,38 @@
+<div class="container">
+    <div id="table-scroll" class="table-scroll">
+        <table class="table table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <% Match.columns[2..-1].each do |col| %>
+                        <th scope="col"><a href="?sort=<%= col %>"><%= col.to_s.gsub('_', '&nbsp;').split.map(&:capitalize).join(' ') %></a></th>
+                    <% end %>
+                    <th>Edit</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% matches.each do |match| %>
+                    <tr>
+                        <% Match.columns[0..-1].each.with_index do |col, index| %>
+                            <% Match.select(col).where(:id => match.id).each do |val| %>
+                                <% val.each do |data| %>
+                                    <% Match.select(data.first).where(:id => match.id).each do |v| %>
+                                        <% if index == 2 %>
+                                            <th><a href="/competitions/<%= match.comp_id %>/teams/<%= match.team_number %>"><%= v[data.first] %></a></td>
+                                        <% elsif index > 2 %>
+                                            <td><%= v[data.first].to_s.gsub(' ', '&nbsp;') %></td>
+                                        <% end %>
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                        <% end %>
+                        <td>
+                            <a href="/matches/<%= match.id %>/edit" class="btn btn-primary btn-small">
+                                <i class="icon-white icon-pencil"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+</div>

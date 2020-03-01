@@ -1,0 +1,89 @@
+<%= erb :header %>
+
+<div class="container">
+    <h2>Enter Team Info (<%= @competition.name %> - <%= @competition.year %>)</h2>
+    <form action="/pit_scouting" method="POST" id="myForm" enctype="multipart/form-data">
+        <label>Name</label>
+        <input type="text" name="scouter_name" required placeholder="Name of scouter"/>
+
+        <label>Team Name</label>
+        <input type="text" name="team_name" required />
+
+        <label>Team Number</label>
+        <input type="number" min=1 max=9999 name="team_number" required />
+
+        <label>Do they use cameras?</label>
+        <select name="camera" required>
+            <option value="" selected disabled hidden>Select Value</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+
+        <label>What do they use their cameras for?</label>
+        <textarea name="camera_use" rows="4" placeholder="Leave blank if they don't use cameras.">
+        </textarea>
+
+        <label>What is their autonomous strategy?</label>
+        <textarea name="auton_strat" rows="4" placeholder="Score (how many)? Just drive? Nothing?">
+        </textarea>
+
+        <label>What is their game strategy</label>
+        <textarea name="game_strat" rows="4" placeholder="What can they do? What do they do best?">
+        </textarea>
+       
+        <br>
+
+        <label>Climbing</label>
+        <select name="climb" required>
+            <option value="" selected disabled hidden>What climber do they have?</option>
+            <option value="Actively balances & lifts buddy">Actively balance &amp; lift buddy</option>
+            <option value="Actively balances">Activiely balance themselves</option>
+            <option value="Lifts buddy">Lift buddy</option>
+            <option value="Can climb">Can climb</option>
+            <option vale="None">None</option>
+        </select>
+
+        <fieldset>
+            <label>Power Cells Intake</label>
+            <div>
+                <p><input type="checkbox" id="ball_preload" name="ball_intake[]" value="Preload"> Preload</p>
+            </div>
+            <div>
+                <p><input type="checkbox" id="ball_station" name="ball_intake[]" value="Loading Station"> Human Player Station</p>
+            </div>
+            <div>
+                <p><input type="checkbox" id="ball_ground" name="ball_intake[]" value="Ground"> Ground Pickup</p>
+            </div>
+            <div>
+                <p><input type="checkbox" id="ball_none" name="ball_intake[]" value="None"> None</p>
+            </div>
+        </fieldset>
+
+        <label>Control Panel</label>
+        <select name="control_panel" required>
+            <option value="" selected disabled hidden>How do they interact with it?</option>
+            <option value="Rotation and Position">Rotation and Position</option>
+            <option value="Rotation only">Rotation Only</option>
+            <option value="Position only">Position Only</option>
+            <option value="None">None</option>
+        </select>
+
+        <br>
+
+        <label>Additional Notes</label>
+        <textarea name="notes" rows="4" placeholder="Is there anything else that they want to add?"></textarea>
+
+        <br><br>
+
+        <label>Add Picture of Robot</label>
+        <input type="file" name="file" accept="image/*" required>
+
+        <br><br>
+        <input type=hidden name="comp_id" value="<%= @competition.id %>">
+
+        <label><input type="submit" class="btn btn-success btn-large" value="Save Info"></label>
+    </form>
+</div>
+
+<%= erb :footer %>
+

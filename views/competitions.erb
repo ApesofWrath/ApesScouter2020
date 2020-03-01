@@ -1,0 +1,47 @@
+<%= erb :header %>
+
+<div class="container">
+    <div class="row">
+        <div class="span2">
+            <h2>Competitions</h2>
+        </div>
+    </div>
+    
+    <label>Go to:</label>
+    <select id="goto" required>
+        <option value="competitions">Competition Page</option>
+        <option value="teams">Team List</option>
+        <option value="stats">Stats</option>
+    </select>
+
+    <div class="well">
+        <% Competition.each do |competition| %>
+            <li><h4><a id="comp<%= competition.id %>" onClick="setLink(<%= competition.id %>)" href="#"><%= competition.name %></a></h4></li>
+        <% end %>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function setLink(compId) {
+        var id = "comp" + compId;
+        var link = document.getElementById(id);
+        var e = document.getElementById("goto");
+        var dest = e.options[e.selectedIndex].value;
+        
+        if(dest === "competitions") {
+            link.setAttribute('href', "/competitions/" + compId);
+        }
+        else if(dest === "teams") {
+            link.setAttribute('href', "/competitions/" + compId + "/teams_list");
+        }
+        else if(dest === "stats") {
+            link.setAttribute('href', "/competitions/" + compId + "/stats");
+        }
+        else {
+            alert("Please select an option from the dropdown menu.");
+        }
+    }
+</script>
+
+
+<%= erb :footer %>

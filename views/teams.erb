@@ -1,0 +1,47 @@
+<%= erb :header %>
+
+<div class="container">
+    <div class="row">
+        <div class="span2">
+            <h2>Teams</h2>
+        </div>
+    </div>
+
+    <% num_comps = DB[:competitions].count %>
+    <% if num_comps == 0 %>
+        <p>No competitions found.</p>
+    <% else %>
+        <label>Go to:</label>
+        <select id="comp" required>
+            <% if DB[:competitions].count > 1 %>
+                <option value="" selected disabled hidden>Select competition</option>
+            <% end %>
+            <% Competition.each do |comp| %>
+                <option name="<%= comp.id %>" value="<%= comp.id %>" selected><%= comp.name %> - <%= comp.year %></option>
+            <% end %>
+        </select>
+
+        <div class="well">
+            <% Team.each do |team| %>
+                <li><h4><a id="<%= team.number %>" onClick="setLink(<%= team.number %>)" href="#"><%= team.number %></a></h4></li>
+            <% end %>
+        </div>
+    <% end %>
+</div>
+
+<script type="text/javascript">
+    function setLink(id) {
+        var link = document.getElementById(id);
+        var e = document.getElementById("comp");
+        var compId = e.options[e.selectedIndex].value;
+        
+        if(compId.length > 0) {
+            link.setAttribute('href', "/competitions/" + compId + "/teams/" + id);
+        }
+        else {
+            alert("Please select a competition."); 
+        }
+    }
+</script>
+
+<%= erb :footer %>

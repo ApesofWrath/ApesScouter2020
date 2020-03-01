@@ -1,0 +1,20 @@
+<%= erb :header %>
+
+<div class="container">
+    <div class="row">
+        <div class="span2">
+            <h2>Teams at <%= @competition.name %> (<%= @competition.year %>)</h2>
+        </div>
+    </div>
+    
+    <div class="well">
+        <% Team.each do |team| %>
+            <% if Pit_Scouting.where([[:comp_id, @competition.id], [:team_number, team.number]]).all.length > 0 ||
+                    Match.where([[:comp_id, @competition.id], [:team_number, team.number]]).all.length > 0 %>
+                        <li><h4><a href="/competitions/<%= @competition.id %>/teams/<%= team.number %> "><%= team.number %></a></h4></li>
+            <% end %>
+        <% end %>
+    </div>
+</div>
+
+<%= erb :footer %>
