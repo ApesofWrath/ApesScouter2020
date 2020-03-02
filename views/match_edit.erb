@@ -54,6 +54,9 @@
         <label>Misses</label>
         <input type="number" min=0 max=99 name="tele_misses" required value="<%= @match.tele_misses %>" />
 
+        <label>Dropped Balls</label>
+        <input type="number" min=0 max=99 name="dropped_balls" required value="<%= @match.dropped_balls %>" />
+
         <label>Primary Shooting Position</label>
         <select name="shooting_spot" required>
             <option value="na" <% if @match.shooting_spot == "na" %> selected<% end %> >Don't shoot</option>
