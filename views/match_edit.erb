@@ -15,101 +15,72 @@
 
         <br>
 
-        <h3>Sandstorm</h3>
+        <h3>Autonomous</h3>
         <label>Pre Load</label>
         <select name="preload" required>
             <option value="nothing" <% if @match.preload == "nothing" %> selected<% end %> >Nothing</option>
-            <option value="hatch" <% if @match.preload == "hatch" %> selected<% end %> >Hatch</option>
-            <option value="cargo" <% if @match.preload == "cargo" %> selected<% end %> >Cargo</option>
+            <option value="1 ball" <% if @match.preload == "1 ball" %> selected<% end %> >1 ball</option>
+            <option value="2 balls" <% if @match.preload == "2 balls" %> selected<% end %> >2 balls</option>
+            <option value="3 balls" <% if @match.preload == "3 balls" %> selected<% end %> >3 balls</option>
         </select>
     
-        <label>Hab Cross</label>
-        <select name="hab_cross" required>
-            <option value="yes" <% if @match.hab_cross == "yes" %> selected<% end %> >Yes</option>
-            <option value="no" <% if @match.hab_cross == "no" %> selected<% end %> >No</option>
+        <label>Crossed Initiation Line</label>
+        <select name="cross_line" required>
+            <option value="yes" <% if @match.cross_line == "yes" %> selected<% end %> >Yes</option>
+            <option value="no" <% if @match.cross_line == "no" %> selected<% end %> >No</option>
          </select>
-
-        <label>Hab Start</label>
-        <select name="hab_start" required>
-            <option value="1" <% if @match.hab_start == "1" %> selected<% end %> >Level 1</option>
-            <option value="2" <% if @match.hab_start == "2" %> selected<% end %> >Level 2</option>
-        </select>
 
         <br>
         
-        <!-- Sandstorm Hatches and Cargo -->
-        <label>Scored Hatches</label>
-        <input type="number" min=0 max=10 name="sand_hatches" required value="<%= @match.sand_hatches %>" />
+        <!-- Auton Scoring -->
+        <label>Bottom Port</label>
+        <input type="number" min=0 max=99 name="auton_bottom" required value="<%= @match.auton_bottom %>" />
 
-        <label>Scored Cargo</label>
-        <input type="number" min=0 max=10 name="sand_cargo" required value="<%= @match.sand_cargo %>" />
+        <label>Top Port</label>
+        <input type="number" min=0 max=99 name="auton_top" required value="<%= @match.auton_top %>" />
+
+        <label>Misses</label>
+        <input type="number" min=0 max=99 name="auton_misses" required value="<%= @match.auton_misses %>" />
 
         <br>
 
-        <label>Alliance had more than 4 cargo fall out at end of Sandstorm</label>
-        <select name="sand_cargo_fallout" required>
-            <option value="yes" <% if @match.sand_cargo_fallout == "yes" %> selected<% end %> >Yes</option>
-            <option value="no" <% if @match.sand_cargo_fallout == "no" %> selected<% end %> >No</option>
-        </select>   
-
         <h3>Tele Op</h3>
+        <label>Bottom Port</label>
+        <input type="number" min=0 max=99 name="tele_bottom" required value="<%= @match.tele_bottom %>" />
 
-        <table class="table table-condensed table-bordered" style="width: auto;">
-            <thead>
-                <th></th>
-                <th><b>Hatches</b></th>
-                <th><b>Cargo</b></th>
-            </thead>
-            <tr>
-                <th><b>High</b></th>
-                <td><input type="number" min=0 max=10 name="high_hatches" style="width:5em" required value="<%= @match.high_hatches %>" /></td>
-                <td><input type="number" min=0 max=10 name="high_cargo" style="width:5em" required value="<%= @match.high_cargo %>" /></td>
-            </tr>
-            <tr>
-                <th><b>Mid</b></th>
-                <td><input type="number" min=0 max=10 name="mid_hatches" style="width:5em" required value="<%= @match.mid_hatches %>" /></td>
-                <td><input type="number" min=0 max=10 name="mid_cargo" style="width:5em" required value="<%= @match.mid_cargo %>" /></td>
-            </tr>
-            <tr>
-                <th><b>Low</b></th>
-                <td><input type="number" min=0 max=10 name="low_hatches" style="width:5em" required value="<%= @match.low_hatches %>" /></td>
-                <td><input type="number" min=0 max=10 name="low_cargo" style="width:5em" required value="<%= @match.low_cargo %>" /></td>
-            </tr>
-        </table>
+        <label>Top Port</label>
+        <input type="number" min=0 max=99 name="tele_top" required value="<%= @match.tele_top %>" />
 
-        <label>Cargo Ship</label>
-        <table class="table table-condensed table-bordered" style="width: auto;">
-            <tr>
-                <th><b>Hatches:</b></th>
-                <td><input type="number" min=0 max=10 name="cargoship_hatches" style="width:5em" required value="<%= @match.cargoship_hatches %>" /></td>
-            </tr>
-            <tr>
-                <th><b>Cargo:</b></th>
-                <td><input type="number" min=0 max=10 name="cargoship_cargo" style="width:5em" required value="<%= @match.cargoship_cargo %>" /></td>
-            </tr>
-        </table>
+        <label>Misses</label>
+        <input type="number" min=0 max=99 name="tele_misses" required value="<%= @match.tele_misses %>" />
 
-        <label>Dropped Pieces</label>
-        <table class="table table-condensed table-bordered" style="width: auto;">
-            <tr>
-                <th><b>Hatches:</b></th>
-                <td><input type="number" min=0 max=10 name="dropped_hatches" style="width:5em" required value="<%= @match.dropped_hatches %>" /></td>
-            </tr>
-            <tr>
-                <th><b>Cargo:</b></th>
-                <td><input type="number" min=0 max=10 name="dropped_cargo" style="width:5em" required value="<%= @match.dropped_cargo %>" /></td>
-            </tr>
-        </table>
+        <label>Primary Shooting Position</label>
+        <select name="shooting_spot" required>
+            <option value="na" <% if @match.shooting_spot == "na" %> selected<% end %> >Don't shoot</option>
+            <option value="scoring zone" <% if @match.shooting_spot == "scoring zone" %> selected<% end %> >Scoring Zone</option>
+            <option value="initiation line" <% if @match.shooting_spot == "initiation line" %> selected<% end %> >Initiation Line</option>
+            <option value="near trench" <% if @match.shooting_spot == "near trench" %> selected<% end %> >Near Trench</option>
+            <option value="far trench" <% if @match.shooting_spot == "far trench" %> selected<% end %> >Far Trench</option>
+            <option value="against wall" <% if @match.shooting_spot == "against wall" %> selected<% end %> >Against Wall</option>
+        </select>        
+
+        <label>Control Panel</label>
+        <select name="control_panel" required>
+            <option value="nothing" <% if @match.control_panel == "nothing" %> selected<% end %> >Nothing</option>
+            <option value="rotation" <% if @match.control_panel == "rotation" %> selected<% end %> >Rotation</option>
+            <option value="position" <% if @match.control_panel == "position" %> selected<% end %> >Position</option>
+            <option value="rotation and position" <% if @match.control_panel == "rotation and position" %> selected<% end %> >Rotation and Position</option>
+        </select>
 
         <br>
 
         <h3>Endgame</h3>
         <label>Climb</label>
         <select name="climb" required>
-            <option value="0" <% if @match.climb == "0" %> selected<% end %>>Nothing</option>
-            <option value="1" <% if @match.climb == "1" %> selected<% end %>>Level 1</option>
-            <option value="2" <% if @match.climb == "2" %> selected<% end %>>Level 2</option>
-            <option value="3" <% if @match.climb == "3" %> selected<% end %>>Level 3</option>
+            <option value="hanging and balanced" <% if @match.climb == "hanging and balanced" %> selected<% end %>  >Hanging and balanced</option>
+            <option value="hanging not balanced" <% if @match.climb == "hanging not balanced" %> selected<% end %> >Hanging, but not balanced</option>
+            <option value="park" <% if @match.climb == "park" %> selected<% end %> >Parked</option>
+            <option value="none" <% if @match.climb == "none" %> selected<% end %> >Neither</option>
         </select>
 
         <label>Result</label>
@@ -143,18 +114,19 @@
         <br>
 
         <h3>Miscellaneous</h3>
+        <label>Actively Balance</label>
+        <select name="actively_balance" required>
+            <option value="yes" <% if @match.actively_balance == "yes" %> selected<% end %>>Yes</option>
+            <option value="no" <% if @match.actively_balance == "no" %> selected<% end %>>No</option>
+            <option value="unsure" <% if @match.actively_balance == "unsure" %> selected<% end %>>Unsure</option>
+        </select>
+
         <label>Has Lifts for Buddy Climb</label>
         <select name="buddy_climb" required>
             <option value="yes" <% if @match.buddy_climb == "yes" %> selected<% end %>>Yes</option>
             <option value="no" <% if @match.buddy_climb == "no" %> selected<% end %>>No</option>
             <option value="unsure" <% if @match.buddy_climb == "unsure" %> selected<% end %>>Unsure</option>
         </select>
-
-        <label>Just a Ramp Bot</label>
-        <select name="ramp_bot" required>
-            <option value="yes" <% if @match.ramp_bot == "yes" %> selected<% end %>>Yes</option>
-            <option value="no" <% if @match.ramp_bot == "no" %> selected<% end %>>No</option>
-        </select>   
 
         <label>Has a Camera</label>
         <select name="camera" required>
@@ -163,33 +135,22 @@
             <option value="unsure" <% if @match.camera == "unsure" %> selected<% end %>>Unsure</option>
         </select>   
 
-        <label>Hatch Ground Pickup</label>
-        <select name="hatch_ground_pickup" required>
-            <option value="yes" <% if @match.hatch_ground_pickup == "yes" %> selected<% end %>>Yes</option>
-            <option value="no" <% if @match.hatch_ground_pickup == "no" %> selected<% end %>>No</option>
-            <option value="unsure" <% if @match.hatch_ground_pickup == "unsure" %> selected<% end %>>Unsure</option>
+        <label>Ball Ground Pickup</label>
+        <select name="ball_ground_pickup" required>
+            <option value="yes" <% if @match.ball_ground_pickup == "yes" %> selected<% end %>>Yes</option>
+            <option value="no" <% if @match.ball_ground_pickup == "no" %> selected<% end %>>No</option>
+            <option value="unsure" <% if @match.ball_ground_pickup == "unsure" %> selected<% end %>>Unsure</option>
         </select>
 
-        <label>Cargo Ground Pickup</label>
-        <select name="cargo_ground_pickup" required>
-            <option value="yes" <% if @match.cargo_ground_pickup == "yes" %> selected<% end %>>Yes</option>
-            <option value="no" <% if @match.cargo_ground_pickup == "no" %> selected<% end %>>No</option>
-            <option value="unsure" <% if @match.cargo_ground_pickup == "unsure" %> selected<% end %>>Unsure</option>
-        </select>   
-
-        <label>Hatch Human Intake</label>
-        <select name="hatch_human_intake" required>
-            <option value="yes" <% if @match.hatch_human_intake == "yes" %> selected<% end %>>Yes</option>
-            <option value="no" <% if @match.hatch_human_intake == "no" %> selected<% end %>>No</option>
-            <option value="unsure" <% if @match.hatch_human_intake == "unsure" %> selected<% end %>>Unsure</option>
+        <label>Ball Human Intake</label>
+        <select name="ball_human_intake" required>
+            <option value="yes" <% if @match.ball_human_intake == "yes" %> selected<% end %>>Yes</option>
+            <option value="no" <% if @match.ball_human_intake == "no" %> selected<% end %>>No</option>
+            <option value="unsure" <% if @match.ball_human_intake == "unsure" %> selected<% end %>>Unsure</option>
         </select>
 
-        <label>Cargo Human Intake</label>
-        <select name="cargo_human_intake" required>
-            <option value="yes" <% if @match.cargo_human_intake == "yes" %> selected<% end %>>Yes</option>
-            <option value="no" <% if @match.cargo_human_intake == "no" %> selected<% end %>>No</option>
-            <option value="unsure" <% if @match.cargo_human_intake == "unsure" %> selected<% end %>>Unsure</option>
-        </select>
+        <label>Ball Capacity</label>
+        <input type="number" min=0 max=5 style="width:5em" name="ball_capacity" value="<%= @match.ball_capacity %>" required />
 
         <label>Driver Skill</label>
         <select name="driver_skill" required>

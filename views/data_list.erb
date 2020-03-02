@@ -6,7 +6,6 @@
                     <% Match.columns[2..-1].each do |col| %>
                         <th scope="col"><a href="?sort=<%= col %>"><%= col.to_s.gsub('_', '&nbsp;').split.map(&:capitalize).join(' ') %></a></th>
                     <% end %>
-                    <th>Edit</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,11 +24,6 @@
                                 <% end %>
                             <% end %>
                         <% end %>
-                        <td>
-                            <a href="/matches/<%= match.id %>/edit" class="btn btn-primary btn-small">
-                                <i class="icon-white icon-pencil"></i>
-                            </a>
-                        </td>
                     </tr>
                 <% end %>
             </tbody>
