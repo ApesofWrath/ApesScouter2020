@@ -108,7 +108,7 @@ module ApesScouter
 
             team_data = Pit_Scouting.create(:comp_id => params[:comp_id], :scouter_name => params[:scouter_name],
                                             :team_name => params[:team_name], :team_number => params[:team_number],
-                                            :camera => params[:camera], :camera_use => params[:camera_use].strip,
+                                            :camera => params[:camera], :camera_use => params[:camera_use],
                                             :auton_strategy => params[:auton_strategy], :game_strategy => params[:game_strategy],
                                             :ball_intake => params[:ball_intake].join(', '),
                                             :climb => params[:climb], :control_panel => params[:control_panel],
