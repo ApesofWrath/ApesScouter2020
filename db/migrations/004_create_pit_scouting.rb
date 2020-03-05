@@ -13,12 +13,13 @@ Sequel.migration do
             String :team_name, :null => false
             Integer :team_number, :null => false
             String :camera, :null => false
-            Text :camera_use
-            Text :auton_strat, :null => false
-            Text :game_strat, :null => false
+            Text :camera_use, :null => false
+            Text :auton_strategy, :null => false
+            Text :game_strategy, :null => false
             String :climb, :null => false
             String :ball_intake, :null => false
             String :control_panel, :null => false
+            Text :coolest_thing, :null => false
             Text :notes
         end
     end

@@ -82,9 +82,6 @@ module ApesScouter
 
         # New Pit Scouting
         get '/competitions/:id/new_pit_scout' do
-            if Competition[params[:id]].name == "SFR"
-                halt(400, "I think you've taken a wrong turn...");
-            end
             erb :new_pit_scout
         end
 
@@ -99,7 +96,7 @@ module ApesScouter
             @filename = params[:file][:filename]
             file = params[:file][:tempfile]
             File.open("./public/robots/#{params[:team_number]}_#{params[:comp_id]}", 'wb') do |f|
-                f.write(file.read)
+              f.write(file.read)
             end
            
             # Check if it is the first entry for this team. If so, create entry in teams table.
@@ -107,16 +104,15 @@ module ApesScouter
                 Team.create(:number => params[:team_number])
             end
 
-
             halt(400, "Did you make a selection for intake?") if params[:ball_intake].nil?
 
             team_data = Pit_Scouting.create(:comp_id => params[:comp_id], :scouter_name => params[:scouter_name],
                                             :team_name => params[:team_name], :team_number => params[:team_number],
-                                            :camera => params[:camera], :camera_use => params[:camera_use],
-                                            :auton_strat => params[:auton_strat], :game_strat => params[:game_strat],
+                                            :camera => params[:camera], :camera_use => params[:camera_use].strip,
+                                            :auton_strategy => params[:auton_strategy], :game_strategy => params[:game_strategy],
                                             :ball_intake => params[:ball_intake].join(', '),
                                             :climb => params[:climb], :control_panel => params[:control_panel],
-                                            :notes => params[:notes])
+                                            :coolest_thing => params[:coolest_thing], :notes => params[:notes])
            
             redirect "/competitions/#{team_data.comp_id}/teams/#{team_data.team_number}"
         end

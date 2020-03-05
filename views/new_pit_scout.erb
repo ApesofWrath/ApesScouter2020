@@ -20,13 +20,13 @@
         </select>
 
         <label>What do they use their cameras for?</label>
-        <textarea name="camera_use" rows="4" placeholder="Leave blank if they don't use cameras."></textarea>
+        <textarea name="camera_use" rows="4" required placeholder="Do they use vision targets? For driver to see?"></textarea>
 
         <label>What is their autonomous strategy?</label>
-        <textarea name="auton_strat" rows="4" placeholder="Score (how many)? Just drive? Nothing?"></textarea>
+        <textarea name="auton_strategy" rows="4" required placeholder="Score (how many)? Just drive? Nothing?"></textarea>
 
         <label>What is their game strategy</label>
-        <textarea name="game_strat" rows="4" placeholder="What can they do? What do they do best?"></textarea>
+        <textarea name="game_strategy" rows="4" required placeholder="What can they do? What do they do best?"></textarea>
        
         <br>
 
@@ -66,14 +66,17 @@
         </select>
 
         <br>
+        
+        <label>Coolest Thing</label>
+        <textarea name="coolest_thing" rows="4" required placeholder="What is the coolest thing about their robot?"></textarea>
 
-        <label>Additional Notes</label>
-        <textarea name="notes" rows="4" placeholder="Is there anything else that they want to add?"></textarea>
+        <label>Additional Notes and Something You Learned</label>
+        <textarea name="notes" rows="4" required placeholder="Anything else that they want to add? Ask them questions about your subgroup (electrical, programming, etc.)"></textarea>
 
         <br><br>
 
         <label>Add Picture of Robot</label>
-        <input type="file" name="file" accept="image/*" required>
+        <input type="file" name="file" accept="image/*" >
 
         <br><br>
         <input type=hidden name="comp_id" value="<%= @competition.id %>">
