@@ -34,7 +34,7 @@
         <select name="climb" required>
             <option value="" selected disabled hidden>What climber do they have?</option>
             <option value="Actively balances & lifts buddy">Actively balance &amp; lift buddy</option>
-            <option value="Actively balances">Activiely balance themselves</option>
+            <option value="Actively balances">Actively balance themselves</option>
             <option value="Lifts buddy">Lift buddy</option>
             <option value="Can climb">Can climb</option>
             <option vale="None">None</option>
@@ -81,7 +81,7 @@
         <br><br>
         <input type=hidden name="comp_id" value="<%= @competition.id %>">
 
-        <label><input type="submit" class="btn btn-success btn-large" value="Save Info"></label>
+        <label><input type="submit" required class="btn btn-success btn-large" value="Save Info"></label>
     </form>
 </div>
 
