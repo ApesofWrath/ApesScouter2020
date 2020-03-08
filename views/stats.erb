@@ -37,6 +37,27 @@
             <% end %>
         <% end %>
 
+        <% #DB[:teams].each do |row|
+          #count = DB[:matches].where((Sequel.or(climb: "hanging not balanced", climb: "hanging and balanced")) & Sequel.(team_number: row[:number])).sql.count %>
+          
+          <table class="table table-condensed table-bordered" style="width: 26.67%;">
+            <thead>
+              <tr>
+                <th style="width: 50%;"><b>Team Number</b></th>
+                <th style="width: 50%;"><b>Total Climbs</b></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% DB.fetch("SELECT team_number, COUNT(team_number) FROM matches WHERE (climb='hanging not balanced' OR climb='hanging and balanced') GROUP BY team_number ORDER BY 2 DESC;") do |row| %>    
+                <tr>
+                  <th><a href="/competitions/<%= @competition.id %>/teams/<%= row[:team_number] %>"><%= row[:team_number] %></a></th>
+                  <td><%= row[:"COUNT(team_number)"] %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+          
+
         <h4>Best Averages</h4>
         <% Match.columns.each do |col| %>
             <% if included_cats.include?(col.to_s) %>
