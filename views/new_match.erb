@@ -83,7 +83,8 @@
 
         <label>Primary Shooting Position</label>
         <select name="shooting_spot" required>
-            <option value="na">Don't shoot</option>
+            <option value="" selected disabled hidden>Where do they shoot??</option>
+            <option value="N/A">Don't shoot</option>
             <option value="initiation line">Initiation Line</option>
             <option value="near trench">Near Trench</option>
             <option value="far trench">Far Trench</option>
@@ -144,19 +145,10 @@
 
         <label>Has Lifts for Buddy Climb</label>
         <select name="buddy_climb" required>
-            <option value="" selected disabled hidden>Lifts another bot to both climb</option>
-            <option value="yes">Yes</option>
             <option value="no">No</option>
+            <option value="yes">Yes</option>
             <option value="unsure">Unsure</option>
         </select>
-
-        <label>Has a Camera</label>
-        <select name="camera" required>
-            <option value="" selected disabled hidden>Select Option</option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-            <option value="unsure">Unsure</option>
-        </select>   
 
         <label>Power Cell Ground Pickup</label>
         <select name="ball_ground_pickup" required>
@@ -173,6 +165,7 @@
             <option value="bottom">Bottom</option>
             <option value="both">Both</option>
             <option value="no">No</option>
+            <option value="unsure">Unsure</option>
         </select>
 
         <label>Bot power cell capacity</label>

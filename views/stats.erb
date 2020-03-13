@@ -37,28 +37,49 @@
             <% end %>
         <% end %>
 
+        <!-- Total number of successful climbs ordered by team -->
         <% #DB[:teams].each do |row|
           #count = DB[:matches].where((Sequel.or(climb: "hanging not balanced", climb: "hanging and balanced")) & Sequel.(team_number: row[:number])).sql.count %>
           
-          <table class="table table-condensed table-bordered" style="width: 26.67%;">
-            <thead>
+        <table class="table table-condensed table-bordered" style="width: 26.67%;">
+          <thead>
+            <tr>
+              <th style="width: 50%;"><b>Team Number</b></th>
+              <th style="width: 50%;"><b>Total Climbs</b></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% DB.fetch("SELECT team_number, COUNT(team_number) FROM matches WHERE (climb='hanging not balanced' OR climb='hanging and balanced') GROUP BY team_number ORDER BY 2 DESC;") do |row| %>    
               <tr>
-                <th style="width: 50%;"><b>Team Number</b></th>
-                <th style="width: 50%;"><b>Total Climbs</b></th>
+                <th><a href="/competitions/<%= @competition.id %>/teams/<%= row[:team_number] %>"><%= row[:team_number] %></a></th>
+                <td><%= row[:"COUNT(team_number)"] %></td>
               </tr>
-            </thead>
-            <tbody>
-              <% DB.fetch("SELECT team_number, COUNT(team_number) FROM matches WHERE (climb='hanging not balanced' OR climb='hanging and balanced') GROUP BY team_number ORDER BY 2 DESC;") do |row| %>    
-                <tr>
-                  <th><a href="/competitions/<%= @competition.id %>/teams/<%= row[:team_number] %>"><%= row[:team_number] %></a></th>
-                  <td><%= row[:"COUNT(team_number)"] %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-          
+            <% end %>
+          </tbody>
+        </table>
 
         <h4>Best Averages</h4>
+
+        <!-- Average point contribution per match -->
+        <table class="table table-condensed table-bordered" style="width: 26.67%;">
+          <thead>
+            <tr>
+              <th style="width: 50%;"><b>Team Number</b></th>
+              <th style="width: 50%;"><b>Average Point Contribution</b></th>
+            </tr>
+          </thead>
+          <tbody>
+          <!-- auton top & bottom, tele top & bottom, cross line, (no climb) -->
+          <% DB.fetch("SELECT team_number, AVG(tele_top)*2.333 + AVG(tele_bottom) + AVG(auton_bottom)*2 + AVG(auton_top)*4.667 + AVG(case when cross_line='yes' then 5 else 0 end) + AVG(case when climb='hanging and balanced' OR climb='hanging not balanced' then 25 else 0 end) AS points FROM matches GROUP BY team_number ORDER BY 2 DESC;") do |row| %> 
+              <tr>
+                <th><a href="/competitions/<%= @competition.id %>/teams/<%= row[:team_number] %>"><%= row[:team_number] %></a></th>
+                <td><%= row[:"points"].to_f %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+
         <% Match.columns.each do |col| %>
             <% if included_cats.include?(col.to_s) %>
                 <table class="table table-condensed table-bordered" style="width: 26.67%;">
