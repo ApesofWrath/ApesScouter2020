@@ -70,7 +70,7 @@
           </thead>
           <tbody>
           <!-- auton top & bottom, tele top & bottom, cross line, (no climb) -->
-          <% DB.fetch("SELECT team_number, AVG(tele_top)*2.333 + AVG(tele_bottom) + AVG(auton_bottom)*2 + AVG(auton_top)*4.667 + AVG(case when cross_line='yes' then 5 else 0 end) + AVG(case when climb='hanging and balanced' OR climb='hanging not balanced' then 25 else 0 end) + AVG(case when climb='climb' then 5 else 0 end) AS points FROM matches GROUP BY team_number ORDER BY 2 DESC;") do |row| %> 
+          <% DB.fetch("SELECT team_number, AVG(tele_top)*2.333 + AVG(tele_bottom) + AVG(auton_bottom)*2 + AVG(auton_top)*4.667 + AVG(case when cross_line='yes' then 5 else 0 end) + AVG(case when climb='hanging and balanced' OR climb='hanging not balanced' then 25 else 0 end) + AVG(case when climb='park' then 5 else 0 end) AS points FROM matches GROUP BY team_number ORDER BY 2 DESC;") do |row| %> 
               <tr>
                 <th><a href="/competitions/<%= @competition.id %>/teams/<%= row[:team_number] %>"><%= row[:team_number] %></a></th>
                 <td><%= row[:"points"].to_f %></td>
